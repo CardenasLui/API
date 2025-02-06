@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NasaService } from '../nasa.service';
+import { ChuckService } from '../joke.service';
+import { CategoriasService } from '../categorias.service';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +9,17 @@ import { NasaService } from '../nasa.service';
   standalone: false,
 })
 export class HomePage {
+  norris: any;
+  categorias: any = [];
 
-  imageData: any;
-
-  constructor(private nasaService: NasaService) { }
-
-  ngOnInit() {
-    this.nasaService.getImageOfTheDay().subscribe((data) => {
-      this.imageData = data;
-    });
+  constructor(private ChuckService: ChuckService, private CategoriasService: CategoriasService) {
   }
 
+  ngOnInit() {
+    this.ChuckService.getImageOfTheDay().subscribe((data) => {
+      this.norris = data;
+    });
+
+    this.CategoriasService.getlist().subscribe((data) => { this.categorias = data, console.log(data.results) });
+  }
 }

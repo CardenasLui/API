@@ -14,22 +14,26 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <ng-container *ngIf="imageData; else loading">
+    <ng-container *ngIf="norris; else loading">
       <ion-card>
-        <img [src]="imageData.url" alt="Nasa Image of the Day" />
         <ion-card-header>
-          <ion-card-title>{{imageData.title}}</ion-card-title>
+          <ion-card-title>
+            {{norris.value}}
+          </ion-card-title>
         </ion-card-header>
-
-        <ion-card-content>
-          <p>{{imageData.explanation}}</p>
-          <p><strong>Date::</strong>{{imageData.date}}</p>
-        </ion-card-content>
       </ion-card>
     </ng-container>
 
+    <ng-container *ngIf="categorias; else loading">
+      Categorias:
+      <tr *ngFor="let item of categorias; index as i">
+
+        <td>{{ item }}</td>
+      </tr>
+    </ng-container>
     <ng-template #loading>
-      <ion-spinner name="crescent"></ion-spinner>
+      <ion-spinner name="crescent">
+      </ion-spinner>
     </ng-template>
   </ion-content>
 </ion-content>
